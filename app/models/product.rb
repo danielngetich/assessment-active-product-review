@@ -6,8 +6,10 @@ class Product <ActiveRecord::Base
         Review.create(star_rating:star_rating,comment:comment,user_id:user.id,product_id:self.id)
     end
     def print_all_reviews
-        if (Product.name==name && )
-        Review.all.map{|review|
-            puts "Review for #{name} by #{users.name}: #{review.star_rating}. #{review.comment}"}
+        self.reviews.map{|review|
+            puts "Review for #{review.product.name} by #{review.user.name}: #{review.star_rating}. #{review.comment}"}
+    end
+    def average_rating
+        self.reviews.average(:star_rating).to_f
     end
 end
